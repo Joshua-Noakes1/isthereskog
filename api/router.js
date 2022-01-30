@@ -12,6 +12,11 @@ router.get('/v1', async function (req, res) {
 });
 
 // v1 
+router.get('/v1/skog/getStock', async function (req, res) {
+    res.send("lol")
+});
+
+// ingka routes
 router.use('/v1/ingka', require('./v1/skog/ingka/router'));
 
 module.exports = router;
