@@ -26,6 +26,28 @@ async function getStock(buCode, storeName, prodCode) {
         return {
             success: false,
             stock: {
+                buCode: 0,
+                productId: 0,
+                createdAt: new Date().toISOString(),
+                forecast: [{
+                    "stock": 0,
+                    "date": new Date(Date.now() + 86500000).toISOString(),
+                    "probability": "LOW"
+                }, {
+                    "stock": 0,
+                    "date": new Date(Date.now() + 172800000).toISOString(),
+                    "probability": "LOW"
+                }, {
+                    "stock": 0,
+                    "date": new Date(Date.now() + 259200000).toISOString(),
+                    "probability": "LOW"
+                }, {
+                    "stock": 0,
+                    "date": new Date(Date.now() + 345600000).toISOString(),
+                    "probability": "LOW"
+                }, ],
+                probability: "LOW",
+                restockDate: null,
                 stock: 0
             }
         }
