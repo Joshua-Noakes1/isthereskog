@@ -24,7 +24,10 @@ async function getStock(buCode, storeName) {
     } catch (e) {
         console.log(lcl.red("[Stock Lookup - Error]"), "Failed to get stock data for skog in store:", lcl.yellow(`${storeName} (${buCode})`));
         return {
-            success: false
+            success: false,
+            stock: {
+                stock: 0
+            }
         }
     }
 
