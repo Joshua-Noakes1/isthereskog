@@ -31,7 +31,7 @@ async function getStock(buCode, storeName, prodCode) {
                 createdAt: new Date().toISOString(),
                 forecast: [{
                     "stock": 0,
-                    "date": new Date(Date.now() + 86500000).toISOString(),
+                    "date": new Date(Date.now() + 86500000).toISOString(), // 86500000 is 1 day in milliseconds
                     "probability": "LOW"
                 }, {
                     "stock": 0,
