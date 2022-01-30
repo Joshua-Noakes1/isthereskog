@@ -1,5 +1,5 @@
 {
-  "name": "repo",
+  "name": "isthereskog",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joshua-noakes1/repo.git"
+    "url": "git+https://github.com/joshua-noakes1/isthereskog.git"
   },
   "author": "joshua-noakes1",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/joshua-noakes1/repo/issues"
+    "url": "https://github.com/joshua-noakes1/isthereskog/issues"
   },
-  "homepage": "https://github.com/joshua-noakes1/repo#readme",
+  "homepage": "https://github.com/joshua-noakes1/isthereskog#readme",
   "dependencies": {
     "body-parser": "^1.19.1",
     "cli-color": "^2.0.1",

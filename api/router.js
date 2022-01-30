@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/v1', async function (req, res) {
-    return res.redirect(307, 'https://github.com/joshua-noakes1/repo');
+    return res.redirect(307, 'https://github.com/joshua-noakes1/isthereskog');
 });
 
 // v1 
