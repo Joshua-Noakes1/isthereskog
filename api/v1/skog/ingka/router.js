@@ -69,7 +69,7 @@ router.get('/getStock', async function (req, res) {
 
     // if store not found return error
     if (!stockStore.found) {
-        console.log(lcl.red("[Store Lookup - Error]"), "Failed to find store:", lcl.yellow(`${stockStore.name} (${stockStore.buCode})`));
+        console.log(lcl.red("[Store Lookup - Error]"), "Failed to find store:", lcl.yellow(`${stockStore.name || "Unknown"} (${stockStore.buCode})`));
         return res.status(400).json({
             success: false,
             error: "Failed to find store"
@@ -77,7 +77,7 @@ router.get('/getStock', async function (req, res) {
     }
 
     // get stock
-    res.json(await getStock(stockStore.buCode, stockStore.name));
+    res.json(await getStock(stockStore.buCode, stockStore.name, req.query.prodCode));
 });
 
 
