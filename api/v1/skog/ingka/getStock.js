@@ -15,7 +15,7 @@ async function getStock(buCode, storeName, prodCode) {
 
     // lookup stock for skog in store
     try {
-        const stock = await ingka.availability(buCode, prodCode || '00402813') // 00402813 is code for skog
+        const stock = await ingka.availability(buCode, prodCode)
         console.log(lcl.green("[Stock Lookup - Success]"), "Found stock data for product in store:", lcl.yellow(`${storeName} (${buCode})`));
         return {
             success: true,
