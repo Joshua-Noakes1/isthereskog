@@ -13,7 +13,8 @@ async function getStores(ISOCode) {
         if (stores.length <= 0) {
             console.log(lcl.red("[Store Lookup - Error]"), "Failed to get stores for country code:", lcl.yellow(ISOCode));
             return {
-                success: false
+                success: false,
+                message: "Store doesn't exist for country code: " + ISOCode
             }
         }
 
@@ -26,7 +27,8 @@ async function getStores(ISOCode) {
     } catch (e) {
         console.log(lcl.red("[Store Lookup - Error]"), "Failed to get stores for country code:", lcl.yellow(ISOCode));
         return {
-            success: false
+            success: false,
+            message: "Failed to get stores for country code: " + ISOCode
         }
     }
 }

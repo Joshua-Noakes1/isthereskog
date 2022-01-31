@@ -1,5 +1,5 @@
 const lcl = require('cli-color'),
-    getStock = require('./ingka/getStock');
+    getStock = require('../ingka/getStock');
 
 async function getSkogStock(buCode, storeName) {
     // getting stock from ingka

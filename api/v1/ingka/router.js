@@ -1,6 +1,6 @@
 const lcl = require('cli-color'),
     express = require('express'),
-    afe = require('../../../../lib/asyncForEach'),
+    afe = require('../../../lib/asyncForEach'),
     getStores = require('./getStores'),
     getStock = require('./getStock');
 
@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 });
 
 // Api routes
-router.get('/getStores', async function (req, res) {
+router.get('/getStores', async function (req, res) { // /api/v1/skog/getStores?ISOCode=GB
     // log error if no country code is passed
     if (!req.query.ISOCode) {
         console.log(lcl.red("[Express - Error]"), "No ISO code provided");
@@ -29,7 +29,7 @@ router.get('/getStores', async function (req, res) {
     res.json(await getStores(ISOCode));
 });
 
-router.get('/getStock', async function (req, res) {
+router.get('/getStock', async function (req, res) { // /api/v1/skog/getStock?buCode=000&ISOCode=GB&prodCode=00000000
     // log error if no bucode is passed
     if (!req.query.buCode) {
         console.log(lcl.red("[Express - Error]"), "No store code provided");
@@ -48,6 +48,14 @@ router.get('/getStock', async function (req, res) {
         });
     }
 
+    // log error if no prodcode is passed
+    if (!req.query.prodCode) {
+        console.log(lcl.red("[Express - Error]"), "No product code provided");
+        return res.status(400).json({
+            success: false,
+            error: "No product code provided"
+        });
+    }
     // ISO code to uppercase
     const ISOCode = req.query.ISOCode.toUpperCase();
 
