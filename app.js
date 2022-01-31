@@ -3,7 +3,9 @@ const lcl = require('cli-color'),
     cors = require('cors'),
     morgan = require('morgan'),
     bodyParser = require("body-parser"),
+    workerpool = require('./lib/workerPool/workerController'),
     express = require('express');
+
 
 // global express
 const app = express();
@@ -38,5 +40,9 @@ app.use((error, req, res, next) => {
 // start express server
 const port = process.env.PORT || 3000;
 app.listen(port, async function () {
+    // launch workerpool
+    await workerpool.init({
+        minWorkers: 'max'
+    });
     console.log(lcl.blue("[Express - Info]"), "Started on port", lcl.yellow(port));
 });
