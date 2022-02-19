@@ -11,7 +11,7 @@
     );
     let ikStock = await getStock.json();
 
-    if (ikStock.success != true) {
+    if (ikStock.success != true && !ikStock.stock) {
       alert(ikStock.message);
       return console.error(ikStock.message);
     }
