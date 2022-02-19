@@ -2,18 +2,41 @@
   import { onMount } from "svelte";
   import { Chart, registerables } from "chart.js";
   Chart.register(...registerables);
+  let buCode = "";
+  let myCrt;
 
-  function createCanvas() {
+  async function createCanvas(buCode) {
+    let getStock = await fetch(
+      `https://skog-vercel.vercel.app/api/skog/getStock?buCode=${buCode}`
+    );
+    let ikStock = await getStock.json();
+
+    if (ikStock.success != true) {
+      alert(ikStock.message);
+      return console.error(ikStock.message);
+    }
     const canvas = <HTMLCanvasElement>document.getElementById("myChart");
     const ctx = canvas.getContext("2d");
-    const myChart = new Chart(ctx, {
+    myCrt = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: [
+          "In Stock",
+          "Predict +1",
+          "Predict +2",
+          "Predict +3",
+          "Predict +4",
+        ],
         datasets: [
           {
-            label: "# of Votes",
-            data: [12, 19, 3, 5, 2, 3],
+            label: `Store: ${ikStock.store.name}`,
+            data: [
+              ikStock.stock.stock,
+              ikStock.stock.forecast[0].stock,
+              ikStock.stock.forecast[1].stock,
+              ikStock.stock.forecast[2].stock,
+              ikStock.stock.forecast[3].stock,
+            ],
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
               "rgba(54, 162, 235, 0.2)",
@@ -35,6 +58,8 @@
         ],
       },
       options: {
+        responsive: true,
+        // maintainAspectRatio: true,
         scales: {
           y: {
             beginAtZero: true,
@@ -44,7 +69,22 @@
     });
   }
 
-  onMount(createCanvas);
+  async function btnHndl() {
+    if (myCrt != undefined) {
+      const canvas = <HTMLCanvasElement>document.getElementById("myChart");
+      const ctx = canvas.getContext("2d");
+      await ctx.clearRect(0, 0, canvas.width, canvas.height);
+      await myCrt.destroy();
+    }
+    return await createCanvas(buCode);
+  }
 </script>
 
-<canvas id="myChart" width="400" height="400" />
+<div class="has-text-centered">
+  <p class="title is-4">Enter buCode</p>
+  <input class="input" placeholder="Enter valid buCode" bind:value={buCode} />
+  <div style="margin: 10px 0 10px 0;"></div>
+  <button class="button" on:click={btnHndl}>Check Fat Bear</button>
+</div>
+<div style="margin: 10px 0 10px 0;"></div>
+<canvas id="myChart" />
