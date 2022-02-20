@@ -76,15 +76,18 @@
       await ctx.clearRect(0, 0, canvas.width, canvas.height);
       await myCrt.destroy();
     }
-    return await createCanvas(buCode);
+    await createCanvas(buCode);
+    return false;
   }
 </script>
 
-<div class="has-text-centered">
-  <p class="title is-4">Enter buCode</p>
-  <input class="input" placeholder="Enter valid buCode" bind:value={buCode} />
-  <div style="margin: 10px 0 10px 0;"></div>
-  <button class="button" on:click={btnHndl}>Check Fat Bear</button>
-</div>
-<div style="margin: 10px 0 10px 0;"></div>
+<form on:submit={btnHndl}>
+  <div class="has-text-centered">
+    <p class="title is-4">Enter buCode</p>
+    <input class="input" placeholder="Enter valid buCode" bind:value={buCode} />
+    <div style="margin: 10px 0 10px 0;" />
+    <button type="submit" class="button" on:click={btnHndl}>Check Fat Bear</button>
+  </div>
+</form>
+<div style="margin: 10px 0 10px 0;" />
 <canvas id="myChart" />
