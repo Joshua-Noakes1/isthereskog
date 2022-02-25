@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { Chart, registerables } from "chart.js";
   Chart.register(...registerables);
-  let buCode = "";
+  let buCode;
   let myCrt;
+  let prodCode;
 
   async function createCanvas(buCode) {
     let getStock = await fetch(
-      `https://skog-vercel.vercel.app/api/skog/getStock?buCode=${buCode}`
+      `https://skog-vercel.vercel.app/api/skog/getStock?buCode=${buCode}&prodCode=${prodCode}`
     );
     let ikStock = await getStock.json();
 
@@ -21,11 +21,11 @@
       type: "bar",
       data: {
         labels: [
-          "In Stock",
-          "Predict +1",
-          "Predict +2",
-          "Predict +3",
-          "Predict +4",
+          "In Stock: Now",
+          `Predict: ${new Date(ikStock.stock.forecast[0].date).toDateString()}`,
+          `Predict: ${new Date(ikStock.stock.forecast[1].date).toDateString()}`,
+          `Predict: ${new Date(ikStock.stock.forecast[2].date).toDateString()}`,
+          `Predict: ${new Date(ikStock.stock.forecast[3].date).toDateString()}`,
         ],
         datasets: [
           {
@@ -84,6 +84,9 @@
 <div class="has-text-centered">
   <p class="title is-4">Enter buCode</p>
   <input class="input" placeholder="Enter valid buCode" bind:value={buCode} />
+  <div style="margin: 10px 0 10px 0;" />
+  <p class="title is-4">Enter prodCode</p>
+  <input class="input" placeholder="Enter valid prodCode" bind:value={prodCode} />
   <div style="margin: 10px 0 10px 0;" />
   <button class="button" on:click={btnHndl}>Check Fat Bear</button>
 </div>
