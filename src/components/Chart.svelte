@@ -7,7 +7,7 @@
 
   async function createCanvas(buCode) {
     let getStock = await fetch(
-      `https://skog-vercel.vercel.app/api/skog/getStock?buCode=${buCode}&prodCode=${prodCode}`
+      `https://skog-vercel.vercel.app/api/skog/getStock?buCode=${buCode}${prodCode != "" ? `&prodCode=${prodCode}` : ""}`
     );
     let ikStock = await getStock.json();
 
